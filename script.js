@@ -62,8 +62,13 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("musicTime", audio.currentTime);
     });
 
-    if (localStorage.getItem("musicPlaying") === "true") {
-        audio.play();
+    let playPromise = audio.play();
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            audio.muted = false; // Unmute setelah berhasil play
+        }).catch(error => {
+            console.warn("Autoplay diblokir, pengguna harus berinteraksi terlebih dahulu.");
+        });
     }
 
     audio.onplay = function () {
