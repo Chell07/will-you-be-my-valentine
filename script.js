@@ -1,4 +1,4 @@
-(async function checkForUpdates() {
+(async function checkForUpdates() { 
     const currentVersion = "1.0";
     const versionUrl = "https://raw.githubusercontent.com/ivysone/Will-you-be-my-Valentine-/main/version.json"; 
 
@@ -78,4 +78,11 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.onpause = function () {
         localStorage.setItem("musicPlaying", "false");
     };
+
+    document.addEventListener("click", function () {
+        if (audio.paused) {
+            audio.muted = false;
+            audio.play();
+        }
+    }, { once: true }); // Pastikan hanya berjalan sekali
 });
